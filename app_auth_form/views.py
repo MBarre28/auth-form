@@ -4,6 +4,7 @@ from rest_framework import status
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from .models import UserProfile
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
@@ -29,7 +30,6 @@ def protected_view(request):
 
 
 # registeration form
-@csrf_exempt 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 
@@ -45,10 +45,10 @@ def register_user(request):
     
     # conditional statement to check if username already exists
 
-    if User.objects.filter(username=username).exists():
+    if UserProfile.objects.filter(username=username).exists():
         return Response({'incorrect_field': 'username already exists'}, status=status.HTTP_400_BAD_REQUEST)
     
-    user = User.objects.create_user(
+    user = UserProfile.objects.create_user(
     username = username,
     password = password,
     email = email,

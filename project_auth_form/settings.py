@@ -35,7 +35,7 @@ REST_FRAMEWORK = {
     )
 }
 
-
+AUTH_USER_MODEL = "app_auth_form.UserProfile"
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "project_auth_form",
+    "app_auth_form",
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework.authtoken",
